@@ -21,6 +21,33 @@ package main
 
 import "fmt"
 
-func main() {
+type Mechanic interface {
+	gotToLift()
+}
 
+type SmallVehicle string
+type StandardVehicle string
+type LargeVehicle string
+
+func (s SmallVehicle) gotToLift() {
+	fmt.Printf("%s is small lift\n", s)
+}
+
+func (st StandardVehicle) gotToLift() {
+	fmt.Printf("%s is standard lift\n", st)
+}
+
+func (l LargeVehicle) gotToLift() {
+	fmt.Printf("%s is large lift\n", l)
+}
+
+func directVehicles(vehicles []Mechanic) {
+	for _, v := range vehicles {
+		v.gotToLift()
+	}
+}
+
+func main() {
+	vehicles := []Mechanic{SmallVehicle("Yamaha R1"), StandardVehicle("Toyota Camry"), LargeVehicle("Ford F-150")}
+	directVehicles(vehicles)
 }
